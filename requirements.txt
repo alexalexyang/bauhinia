@@ -1,0 +1,7 @@
+yfinance
+pandas
+matplotlib
+seaborn
+jupyterlab
+playsound
+PyObjC
