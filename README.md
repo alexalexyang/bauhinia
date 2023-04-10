@@ -1,6 +1,8 @@
 ## Todo next
 
-- Visualise only tickers that experience drop in close price in the last day.
+Currently, this app finds tickers where the trend is rising over 6 months but falling over the last 24 hours.
+
+Maybe we should find prices 2 STDs below mean in the current moment.
 
 
 ## Install latest Python in venv
@@ -23,5 +25,7 @@ Start without opening browser: `jupyter lab --no-browser`
 
 
 ## References
+
+[yfinance](https://pypi.org/project/yfinance/)
 
 [JupyterLab](https://jupyterlab.readthedocs.io)
