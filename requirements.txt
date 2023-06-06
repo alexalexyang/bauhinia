@@ -1,4 +1,5 @@
 yfinance
+yahooquery
 pandas
 matplotlib
 seaborn
