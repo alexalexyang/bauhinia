@@ -1,4 +1,4 @@
 *.ipynb_checkpoints
-*_data
+data
 myenv
 sound.mp3

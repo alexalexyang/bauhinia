@@ -13,7 +13,9 @@ Maybe we should find prices 2 STDs below mean in the current moment.
 
 ## Use the venv
 
-Activate: `source myenv/bin/activate`
+On 23 Dec 2023 I installed Python 3.12 in Conda.
+
+Activate: `conda activate 3.12`
 
 Check version: `python --version`
 
