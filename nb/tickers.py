@@ -32,8 +32,8 @@ alt_energy_tickers = list(set(
 # tickers = sorted(con_energy_tickers)
 picks = list(set(con_energy_tickers + alt_energy_tickers))
 
-# tickers = sorted(picks)
-tickers = ["AAPL", "MSFT"]
+tickers = sorted(picks)
+# tickers = ["AAPL", "MSFT"]
 
 # large_cap = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')[0]['Symbol'].values.tolist()[:5]
 # mid_cap = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_400_companies')[0]['Ticker symbol'].values.tolist()[:5]

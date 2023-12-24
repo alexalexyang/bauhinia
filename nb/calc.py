@@ -55,7 +55,7 @@ def get_target_tickers(
 
             # Falling trend over last 24 hours
             if latest_coeff < 0:
-                print(f'{ticker}, Slope: {coeff}, Intercept: {intercept}')
+                # print(f'{ticker}, Slope: {coeff}, Intercept: {intercept}')
                 df["Fitted"] = fitted_line
                 suitable[ticker] = df
         
