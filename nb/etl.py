@@ -74,7 +74,7 @@ def prep_and_save_stock_data(
         df['2 STD Below Mean'] = df['Close Rolling Mean'] - 2 * df['Close STD']
         df['2 STD Below Mean (Close)'] = np.where(df['Close'] < df['2 STD Below Mean'], df['Close'], NaN) # type: ignore
         
-        df.to_csv(f"{data_dir}/{date}_{ticker}.csv")
+        df.to_csv(f"{data_dir}/{ticker}.csv")
 
         new_multi_df[ticker] = df
 

@@ -27,7 +27,6 @@ def calc_line_params(
     intercept = fit[1]
 
     fitted_line = coeff * x_seq + intercept
-    # df["Fitted"] = fitted_line
 
     return coeff, intercept, fitted_line
 
@@ -68,6 +67,7 @@ def plot_ticker(ticker: str, period: str, ma_and_std_window: int, df: DataFrame)
     ax.plot(df.index, df.Close, label='Close price', color='skyblue')
     ax.plot(df.index, df['Close Rolling Mean'], label = f'{ma_and_std_window}-day MA', color='lightgrey')
     ax.plot(df.index, df['2 STD Below Mean (Close)'], label = f'2 STD below Mean', color='red')
+    
     ax.plot(df.index, df.Fitted, label='Fitted', color='orange')
 
     ax.legend(loc='best')

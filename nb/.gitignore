@@ -1,6 +1,8 @@
 __pycache__
 *.ipynb_checkpoints
 data
+prospects_*
+kiv_*
 **/*.csv
 myenv
 sound.mp3
