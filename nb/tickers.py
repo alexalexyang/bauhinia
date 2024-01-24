@@ -1,3 +1,5 @@
+import pandas as pd
+
 # https://www.investopedia.com/top-energy-stocks-4582081
 energy_most_momentum = ['AR', 'OXY', 'DVN', 'XLE']
 energy_fast_growing = ['MRO', 'CTRA', 'COP']
@@ -33,9 +35,16 @@ alt_energy_tickers = list(set(
 energy_picks = list(set(con_energy_tickers + alt_energy_tickers))
 tech_picks = ["AAPL"]
 
-tickers = sorted(energy_picks)
+# tickers = sorted(energy_picks)
 # tickers = ["AAPL", "MSFT"]
 
-# large_cap = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')[0]['Symbol'].values.tolist()[:5]
-# mid_cap = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_400_companies')[0]['Ticker symbol'].values.tolist()[:5]
-# small_cap = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_600_companies')[1]['Ticker symbol'].values.tolist()[:5]
+# large cap
+large_cap: list[str] = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')[0]['Symbol'].values.tolist()
+
+
+mid_cap: list[str] = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_400_companies')[0]['Symbol'].values.tolist()
+
+# small cap
+# small_cap: list[str] = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_600_companies')[0]['Symbol'].values.tolist()
+
+tickers = large_cap

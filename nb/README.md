@@ -1,3 +1,9 @@
+## How to use
+
+- Get stock prices with `get_prices.ipynb`
+- Select stocks with `select.ipynb`
+- Analyse with `analyse.ipynb`
+
 ## Todo next
 
 Currently, this app finds tickers where the trend is rising over 6 months but falling over the last 24 hours.

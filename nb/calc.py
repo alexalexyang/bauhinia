@@ -40,29 +40,37 @@ def get_target_tickers(
     suitable: dict[str, DataFrame] = {}
     
     for ticker, df in dfs.items():
-        coeff, intercept, fitted_line = calc_line_params(df)
+        try:
+            coeff, intercept, fitted_line = calc_line_params(df)
 
-        # Rising trend over longer period
-        if coeff > 0:
-            latest_df = yf.download(
-                tickers=ticker,
-                period="1d",
-                interval="1m",
-            )
+            # Rising trend over longer period
+            if coeff > 0:
+                latest_df = yf.download(
+                    tickers=ticker,
+                    period="1d",
+                    interval="1m",
+                )
 
-            latest_coeff, latest_intercept, latest_fitted_line = calc_line_params(latest_df)
+                if len(latest_df) == 0:
+                    print(f'No data for {ticker}')
+                    continue
 
-            # Falling trend over last 24 hours
-            if latest_coeff < 0:
-                # print(f'{ticker}, Slope: {coeff}, Intercept: {intercept}')
-                df["Fitted"] = fitted_line
-                suitable[ticker] = df
+                latest_coeff, latest_intercept, latest_fitted_line = calc_line_params(latest_df)
+
+                # Falling trend over last 24 hours
+                if latest_coeff < 0:
+                    # print(f'{ticker}, Slope: {coeff}, Intercept: {intercept}')
+                    df["Fitted"] = fitted_line
+                    suitable[ticker] = df
+        except Exception as e:
+            print(f'Error with {ticker}: {e}')
+            pass
         
     return suitable
 
 
 def plot_ticker(ticker: str, period: str, ma_and_std_window: int, df: DataFrame):
-    fig, ax = plt.subplots(figsize=(16,9))
+    fig, ax = plt.subplots(figsize=(12,6))
 
     ax.plot(df.index, df.Close, label='Close price', color='skyblue')
     ax.plot(df.index, df['Close Rolling Mean'], label = f'{ma_and_std_window}-day MA', color='lightgrey')

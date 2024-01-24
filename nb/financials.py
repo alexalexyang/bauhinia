@@ -22,6 +22,7 @@ def get_all_earnings_info(dfs: dict[str, DataFrame]) -> list[dict[str, Ticker | 
                 "forwardPE": info.get("forwardPE", "NA"),
                 "pegRatio": info.get("pegRatio", "NA"),
                 "trailingPegRatio": info.get("trailingPegRatio", "NA"),
+                "beta": info.get("beta", "NA"),
                 }
         })
 
@@ -36,3 +37,5 @@ def show_earnings_info(info_list: list[dict[str, Ticker | dict[str, int]]]):
 
         for key, value in info["yf"].items():
             print(f"{key}: {value}")
+        
+        info["yq"].calendar_events

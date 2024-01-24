@@ -9,8 +9,9 @@ from pandas import DataFrame
 import numpy as np
 from numpy import NaN
 
-def delete_data_dir():
-    for match in glob('*data'):
+def delete_data_dir(base_dir: str):
+    for match in glob(f'{base_dir}*'):
+       print(match)
        shutil.rmtree(match)
 
 
@@ -41,7 +42,7 @@ def use_existing_data(
     multi_df = {}
 
     for ticker in tickers:
-        filepath = f"{data_dir}/{date}_{ticker}.csv"
+        filepath = f"{data_dir}/{ticker}/{date}/stats.csv"
         
         if exists(filepath):
             df = pd.read_csv(filepath, index_col=['Date'], parse_dates=['Date']) # type: ignore
@@ -74,7 +75,10 @@ def prep_and_save_stock_data(
         df['2 STD Below Mean'] = df['Close Rolling Mean'] - 2 * df['Close STD']
         df['2 STD Below Mean (Close)'] = np.where(df['Close'] < df['2 STD Below Mean'], df['Close'], NaN) # type: ignore
         
-        df.to_csv(f"{data_dir}/{ticker}.csv")
+        stock_dir = f"{data_dir}/{ticker}/{date}"
+        os.makedirs(stock_dir, exist_ok=True)
+
+        df.to_csv(f"{stock_dir}/stats.csv")
 
         new_multi_df[ticker] = df
 
@@ -93,7 +97,6 @@ def get_stock_data(
         return use_existing_data(data_dir, tickers, date)
     else:
         print("Today's data not found in data dir. Getting new data.")
-        os.makedirs(data_dir, exist_ok=True)
         multi_df = download_data(tickers, period, interval)
         return prep_and_save_stock_data(
             multi_df, tickers, data_dir, date, ma_and_std_window)

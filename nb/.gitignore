@@ -1,8 +1,9 @@
-__pycache__
-*.ipynb_checkpoints
+**/*__pycache__
+**/*.ipynb_checkpoints
 data
 prospects_*
 kiv_*
 **/*.csv
+**/*.json
 myenv
 sound.mp3
