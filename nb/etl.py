@@ -29,6 +29,22 @@ def download_data(
     
     return {tickers[0]: data} if len(tickers) == 1 else data # type: ignore
 
+def download_data_by_dates(
+        tickers: list[str], 
+        start: str,
+        end: str,
+        interval: str
+    ) -> dict[str, DataFrame]:
+    data = yf.download( # type: ignore
+        tickers = tickers,
+        start=start,
+        end=end,
+        interval=interval,
+        group_by = 'ticker'
+    )
+    
+    return {tickers[0]: data} if len(tickers) == 1 else data # type: ignore
+
 
 def use_existing_data(
         data_dir: str, 
@@ -42,13 +58,13 @@ def use_existing_data(
     multi_df = {}
 
     for ticker in tickers:
-        filepath = f"{data_dir}/{ticker}/{date}/stats.csv"
+        filepath = f"{data_dir}/{ticker}/stats.csv"
         
         if exists(filepath):
             df = pd.read_csv(filepath, index_col=['Date'], parse_dates=['Date']) # type: ignore
             multi_df[ticker] = df
 
-            print(f"Using existing data for {ticker}.")
+            # print(f"Using existing data for {ticker}.")
 
     return multi_df # type: ignore
 
@@ -75,7 +91,7 @@ def prep_and_save_stock_data(
         df['2 STD Below Mean'] = df['Close Rolling Mean'] - 2 * df['Close STD']
         df['2 STD Below Mean (Close)'] = np.where(df['Close'] < df['2 STD Below Mean'], df['Close'], NaN) # type: ignore
         
-        stock_dir = f"{data_dir}/{ticker}/{date}"
+        stock_dir = f"{data_dir}/{ticker}"
         os.makedirs(stock_dir, exist_ok=True)
 
         df.to_csv(f"{stock_dir}/stats.csv")

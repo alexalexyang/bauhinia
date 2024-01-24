@@ -7,3 +7,7 @@ kiv_*
 **/*.json
 myenv
 sound.mp3
+
+log
+
+test.ipynb
