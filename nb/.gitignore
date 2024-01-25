@@ -5,6 +5,7 @@ prospects_*
 kiv_*
 **/*.csv
 **/*.json
+**/*.png
 myenv
 sound.mp3
 
